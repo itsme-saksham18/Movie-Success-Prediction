@@ -1,0 +1,1298 @@
+{
+  "total_movies": 1000,
+  "global_mean_revenue": 82.96,
+  "global_mean_rating": 6.72,
+  "global_mean_metascore": 58.99,
+  "global_mean_runtime": 113.2,
+  "global_mean_votes": 169808,
+  "all_genres": [
+    "Action",
+    "Adventure",
+    "Animation",
+    "Biography",
+    "Comedy",
+    "Crime",
+    "Drama",
+    "Family",
+    "Fantasy",
+    "History",
+    "Horror",
+    "Music",
+    "Musical",
+    "Mystery",
+    "Romance",
+    "Sci-Fi",
+    "Sport",
+    "Thriller",
+    "War",
+    "Western"
+  ],
+  "genre_stats": [
+    {
+      "genre": "Animation",
+      "count": 49,
+      "avg_revenue": 186.8,
+      "avg_rating": 7.32,
+      "avg_metascore": 70.06,
+      "avg_votes": 208159
+    },
+    {
+      "genre": "Adventure",
+      "count": 259,
+      "avg_revenue": 152.25,
+      "avg_rating": 6.77,
+      "avg_metascore": 57.72,
+      "avg_votes": 257988
+    },
+    {
+      "genre": "Sci-Fi",
+      "count": 120,
+      "avg_revenue": 131.17,
+      "avg_rating": 6.72,
+      "avg_metascore": 58.27,
+      "avg_votes": 294538
+    },
+    {
+      "genre": "Fantasy",
+      "count": 101,
+      "avg_revenue": 127.98,
+      "avg_rating": 6.55,
+      "avg_metascore": 55.26,
+      "avg_votes": 214818
+    },
+    {
+      "genre": "Family",
+      "count": 51,
+      "avg_revenue": 124.48,
+      "avg_rating": 6.68,
+      "avg_metascore": 55.69,
+      "avg_votes": 146966
+    },
+    {
+      "genre": "Action",
+      "count": 303,
+      "avg_revenue": 122.16,
+      "avg_rating": 6.61,
+      "avg_metascore": 54.07,
+      "avg_votes": 235761
+    },
+    {
+      "genre": "Western",
+      "count": 7,
+      "avg_revenue": 103.58,
+      "avg_rating": 6.77,
+      "avg_metascore": 54.28,
+      "avg_votes": 256665
+    },
+    {
+      "genre": "Musical",
+      "count": 5,
+      "avg_revenue": 81.64,
+      "avg_rating": 6.94,
+      "avg_metascore": 60.0,
+      "avg_votes": 173376
+    },
+    {
+      "genre": "Comedy",
+      "count": 279,
+      "avg_revenue": 76.37,
+      "avg_rating": 6.65,
+      "avg_metascore": 57.66,
+      "avg_votes": 141663
+    },
+    {
+      "genre": "Thriller",
+      "count": 195,
+      "avg_revenue": 72.46,
+      "avg_rating": 6.59,
+      "avg_metascore": 58.7,
+      "avg_votes": 159702
+    },
+    {
+      "genre": "Sport",
+      "count": 18,
+      "avg_revenue": 67.03,
+      "avg_rating": 7.01,
+      "avg_metascore": 61.28,
+      "avg_votes": 114435
+    },
+    {
+      "genre": "Crime",
+      "count": 150,
+      "avg_revenue": 64.62,
+      "avg_rating": 6.79,
+      "avg_metascore": 57.86,
+      "avg_votes": 175600
+    },
+    {
+      "genre": "War",
+      "count": 13,
+      "avg_revenue": 60.25,
+      "avg_rating": 7.35,
+      "avg_metascore": 64.08,
+      "avg_votes": 229783
+    },
+    {
+      "genre": "Mystery",
+      "count": 106,
+      "avg_revenue": 59.17,
+      "avg_rating": 6.89,
+      "avg_metascore": 59.25,
+      "avg_votes": 180634
+    },
+    {
+      "genre": "Biography",
+      "count": 81,
+      "avg_revenue": 57.81,
+      "avg_rating": 7.29,
+      "avg_metascore": 67.71,
+      "avg_votes": 151961
+    },
+    {
+      "genre": "History",
+      "count": 29,
+      "avg_revenue": 56.03,
+      "avg_rating": 7.13,
+      "avg_metascore": 70.45,
+      "avg_votes": 144472
+    },
+    {
+      "genre": "Drama",
+      "count": 513,
+      "avg_revenue": 54.56,
+      "avg_rating": 6.95,
+      "avg_metascore": 63.15,
+      "avg_votes": 145777
+    },
+    {
+      "genre": "Music",
+      "count": 16,
+      "avg_revenue": 49.31,
+      "avg_rating": 7.08,
+      "avg_metascore": 60.69,
+      "avg_votes": 117435
+    },
+    {
+      "genre": "Horror",
+      "count": 119,
+      "avg_revenue": 46.81,
+      "avg_rating": 6.09,
+      "avg_metascore": 56.9,
+      "avg_votes": 87956
+    },
+    {
+      "genre": "Romance",
+      "count": 141,
+      "avg_revenue": 45.95,
+      "avg_rating": 6.69,
+      "avg_metascore": 55.71,
+      "avg_votes": 124617
+    }
+  ],
+  "top_directors": [
+    {
+      "name": "Ridley Scott",
+      "movie_count": 8,
+      "avg_revenue": 89.88,
+      "avg_rating": 6.85
+    },
+    {
+      "name": "David Yates",
+      "movie_count": 6,
+      "avg_revenue": 271.75,
+      "avg_rating": 7.43
+    },
+    {
+      "name": "Michael Bay",
+      "movie_count": 6,
+      "avg_revenue": 236.89,
+      "avg_rating": 6.48
+    },
+    {
+      "name": "M. Night Shyamalan",
+      "movie_count": 6,
+      "avg_revenue": 75.57,
+      "avg_rating": 5.53
+    },
+    {
+      "name": "Paul W.S. Anderson",
+      "movie_count": 6,
+      "avg_revenue": 34.82,
+      "avg_rating": 5.77
+    },
+    {
+      "name": "J.J. Abrams",
+      "movie_count": 5,
+      "avg_revenue": 336.69,
+      "avg_rating": 7.58
+    },
+    {
+      "name": "Christopher Nolan",
+      "movie_count": 5,
+      "avg_revenue": 303.02,
+      "avg_rating": 8.68
+    },
+    {
+      "name": "Zack Snyder",
+      "movie_count": 5,
+      "avg_revenue": 195.15,
+      "avg_rating": 7.04
+    },
+    {
+      "name": "Justin Lin",
+      "movie_count": 5,
+      "avg_revenue": 164.96,
+      "avg_rating": 6.82
+    },
+    {
+      "name": "David Fincher",
+      "movie_count": 5,
+      "avg_revenue": 105.54,
+      "avg_rating": 7.82
+    },
+    {
+      "name": "Peter Berg",
+      "movie_count": 5,
+      "avg_revenue": 102.27,
+      "avg_rating": 6.86
+    },
+    {
+      "name": "Martin Scorsese",
+      "movie_count": 5,
+      "avg_revenue": 91.62,
+      "avg_rating": 7.92
+    },
+    {
+      "name": "Antoine Fuqua",
+      "movie_count": 5,
+      "avg_revenue": 78.64,
+      "avg_rating": 7.04
+    },
+    {
+      "name": "Denis Villeneuve",
+      "movie_count": 5,
+      "avg_revenue": 43.24,
+      "avg_rating": 7.76
+    },
+    {
+      "name": "Danny Boyle",
+      "movie_count": 5,
+      "avg_revenue": 36.68,
+      "avg_rating": 7.42
+    },
+    {
+      "name": "Woody Allen",
+      "movie_count": 5,
+      "avg_revenue": 28.24,
+      "avg_rating": 7.02
+    },
+    {
+      "name": "Francis Lawrence",
+      "movie_count": 4,
+      "avg_revenue": 324.95,
+      "avg_rating": 7.03
+    },
+    {
+      "name": "Jon Favreau",
+      "movie_count": 4,
+      "avg_revenue": 256.4,
+      "avg_rating": 7.42
+    },
+    {
+      "name": "Peter Jackson",
+      "movie_count": 4,
+      "avg_revenue": 215.11,
+      "avg_rating": 7.48
+    },
+    {
+      "name": "Gore Verbinski",
+      "movie_count": 4,
+      "avg_revenue": 207.45,
+      "avg_rating": 6.85
+    },
+    {
+      "name": "Clint Eastwood",
+      "movie_count": 4,
+      "avg_revenue": 164.75,
+      "avg_rating": 7.7
+    },
+    {
+      "name": "James Wan",
+      "movie_count": 4,
+      "avg_revenue": 160.97,
+      "avg_rating": 7.22
+    },
+    {
+      "name": "Steven Spielberg",
+      "movie_count": 4,
+      "avg_revenue": 156.75,
+      "avg_rating": 6.9
+    },
+    {
+      "name": "Paul Feig",
+      "movie_count": 4,
+      "avg_revenue": 141.96,
+      "avg_rating": 6.45
+    },
+    {
+      "name": "Tim Burton",
+      "movie_count": 4,
+      "avg_revenue": 138.5,
+      "avg_rating": 6.7
+    },
+    {
+      "name": "Dennis Dugan",
+      "movie_count": 4,
+      "avg_revenue": 124.68,
+      "avg_rating": 5.83
+    },
+    {
+      "name": "Guy Ritchie",
+      "movie_count": 4,
+      "avg_revenue": 111.74,
+      "avg_rating": 7.42
+    },
+    {
+      "name": "Adam McKay",
+      "movie_count": 4,
+      "avg_revenue": 109.53,
+      "avg_rating": 7.0
+    },
+    {
+      "name": "David O. Russell",
+      "movie_count": 4,
+      "avg_revenue": 108.06,
+      "avg_rating": 7.38
+    },
+    {
+      "name": "Louis Leterrier",
+      "movie_count": 4,
+      "avg_revenue": 105.57,
+      "avg_rating": 6.53
+    },
+    {
+      "name": "Quentin Tarantino",
+      "movie_count": 4,
+      "avg_revenue": 105.1,
+      "avg_rating": 7.9
+    },
+    {
+      "name": "Matthew Vaughn",
+      "movie_count": 4,
+      "avg_revenue": 90.26,
+      "avg_rating": 7.72
+    },
+    {
+      "name": "Nicholas Stoller",
+      "movie_count": 4,
+      "avg_revenue": 85.22,
+      "avg_rating": 6.55
+    },
+    {
+      "name": "Ron Howard",
+      "movie_count": 4,
+      "avg_revenue": 75.92,
+      "avg_rating": 6.95
+    },
+    {
+      "name": "Ben Affleck",
+      "movie_count": 4,
+      "avg_revenue": 64.72,
+      "avg_rating": 7.35
+    },
+    {
+      "name": "Guillermo del Toro",
+      "movie_count": 4,
+      "avg_revenue": 61.55,
+      "avg_rating": 7.2
+    },
+    {
+      "name": "D.J. Caruso",
+      "movie_count": 4,
+      "avg_revenue": 59.66,
+      "avg_rating": 5.88
+    },
+    {
+      "name": "Mike Flanagan",
+      "movie_count": 4,
+      "avg_revenue": 57.13,
+      "avg_rating": 6.32
+    },
+    {
+      "name": "Robert Zemeckis",
+      "movie_count": 4,
+      "avg_revenue": 56.53,
+      "avg_rating": 6.97
+    },
+    {
+      "name": "Alexandre Aja",
+      "movie_count": 4,
+      "avg_revenue": 37.47,
+      "avg_rating": 6.17
+    },
+    {
+      "name": "Joe Wright",
+      "movie_count": 4,
+      "avg_revenue": 34.73,
+      "avg_rating": 6.75
+    },
+    {
+      "name": "Lars von Trier",
+      "movie_count": 4,
+      "avg_revenue": 1.14,
+      "avg_rating": 6.85
+    },
+    {
+      "name": "Andrew Stanton",
+      "movie_count": 3,
+      "avg_revenue": 261.05,
+      "avg_rating": 7.47
+    },
+    {
+      "name": "Bryan Singer",
+      "movie_count": 3,
+      "avg_revenue": 196.44,
+      "avg_rating": 7.07
+    },
+    {
+      "name": "Phil Lord",
+      "movie_count": 3,
+      "avg_revenue": 195.94,
+      "avg_rating": 7.37
+    },
+    {
+      "name": "Sam Mendes",
+      "movie_count": 3,
+      "avg_revenue": 175.77,
+      "avg_rating": 7.3
+    },
+    {
+      "name": "Brad Bird",
+      "movie_count": 3,
+      "avg_revenue": 169.74,
+      "avg_rating": 7.3
+    },
+    {
+      "name": "Marc Webb",
+      "movie_count": 3,
+      "avg_revenue": 165.76,
+      "avg_rating": 7.13
+    },
+    {
+      "name": "Paul Greengrass",
+      "movie_count": 3,
+      "avg_revenue": 165.47,
+      "avg_rating": 7.53
+    },
+    {
+      "name": "David Ayer",
+      "movie_count": 3,
+      "avg_revenue": 150.57,
+      "avg_rating": 7.17
+    },
+    {
+      "name": "Kenneth Branagh",
+      "movie_count": 3,
+      "avg_revenue": 144.24,
+      "avg_rating": 6.73
+    },
+    {
+      "name": "John Lee Hancock",
+      "movie_count": 3,
+      "avg_revenue": 117.35,
+      "avg_rating": 7.47
+    },
+    {
+      "name": "Seth MacFarlane",
+      "movie_count": 3,
+      "avg_revenue": 114.17,
+      "avg_rating": 6.47
+    },
+    {
+      "name": "Roland Emmerich",
+      "movie_count": 3,
+      "avg_revenue": 114.12,
+      "avg_rating": 5.83
+    },
+    {
+      "name": "James Gunn",
+      "movie_count": 3,
+      "avg_revenue": 113.74,
+      "avg_rating": 7.13
+    },
+    {
+      "name": "Judd Apatow",
+      "movie_count": 3,
+      "avg_revenue": 108.75,
+      "avg_rating": 6.5
+    },
+    {
+      "name": "Steven Soderbergh",
+      "movie_count": 3,
+      "avg_revenue": 102.16,
+      "avg_rating": 6.53
+    },
+    {
+      "name": "Matt Reeves",
+      "movie_count": 3,
+      "avg_revenue": 100.23,
+      "avg_rating": 7.27
+    },
+    {
+      "name": "Tom Hooper",
+      "movie_count": 3,
+      "avg_revenue": 100.1,
+      "avg_rating": 7.53
+    },
+    {
+      "name": "Robert Schwentke",
+      "movie_count": 3,
+      "avg_revenue": 95.45,
+      "avg_rating": 6.37
+    }
+  ],
+  "top_actors": [
+    {
+      "name": "Mark Wahlberg",
+      "movie_count": 15,
+      "avg_revenue": 99.87,
+      "avg_rating": 6.77
+    },
+    {
+      "name": "Hugh Jackman",
+      "movie_count": 14,
+      "avg_revenue": 104.93,
+      "avg_rating": 7.14
+    },
+    {
+      "name": "Christian Bale",
+      "movie_count": 13,
+      "avg_revenue": 133.55,
+      "avg_rating": 7.25
+    },
+    {
+      "name": "Brad Pitt",
+      "movie_count": 13,
+      "avg_revenue": 84.28,
+      "avg_rating": 7.48
+    },
+    {
+      "name": "Robert Downey Jr.",
+      "movie_count": 12,
+      "avg_revenue": 262.28,
+      "avg_rating": 7.5
+    },
+    {
+      "name": "Scarlett Johansson",
+      "movie_count": 12,
+      "avg_revenue": 156.25,
+      "avg_rating": 7.32
+    },
+    {
+      "name": "Johnny Depp",
+      "movie_count": 12,
+      "avg_revenue": 156.01,
+      "avg_rating": 6.53
+    },
+    {
+      "name": "Anne Hathaway",
+      "movie_count": 12,
+      "avg_revenue": 137.29,
+      "avg_rating": 6.98
+    },
+    {
+      "name": "Channing Tatum",
+      "movie_count": 12,
+      "avg_revenue": 86.49,
+      "avg_rating": 6.31
+    },
+    {
+      "name": "Tom Hardy",
+      "movie_count": 12,
+      "avg_revenue": 77.55,
+      "avg_rating": 7.36
+    },
+    {
+      "name": "Michael Fassbender",
+      "movie_count": 12,
+      "avg_revenue": 57.09,
+      "avg_rating": 6.94
+    },
+    {
+      "name": "Jennifer Lawrence",
+      "movie_count": 11,
+      "avg_revenue": 206.8,
+      "avg_rating": 7.17
+    },
+    {
+      "name": "Shia LaBeouf",
+      "movie_count": 11,
+      "avg_revenue": 161.72,
+      "avg_rating": 6.71
+    },
+    {
+      "name": "Bradley Cooper",
+      "movie_count": 11,
+      "avg_revenue": 135.52,
+      "avg_rating": 7.19
+    },
+    {
+      "name": "Cate Blanchett",
+      "movie_count": 11,
+      "avg_revenue": 117.43,
+      "avg_rating": 7.05
+    },
+    {
+      "name": "Gerard Butler",
+      "movie_count": 11,
+      "avg_revenue": 100.18,
+      "avg_rating": 6.98
+    },
+    {
+      "name": "Anna Kendrick",
+      "movie_count": 11,
+      "avg_revenue": 74.83,
+      "avg_rating": 6.84
+    },
+    {
+      "name": "Seth Rogen",
+      "movie_count": 11,
+      "avg_revenue": 69.84,
+      "avg_rating": 6.74
+    },
+    {
+      "name": "Chlo\u00eb Grace Moretz",
+      "movie_count": 11,
+      "avg_revenue": 50.5,
+      "avg_rating": 6.7
+    },
+    {
+      "name": "Jake Gyllenhaal",
+      "movie_count": 11,
+      "avg_revenue": 37.36,
+      "avg_rating": 7.36
+    },
+    {
+      "name": "Dwayne Johnson",
+      "movie_count": 10,
+      "avg_revenue": 159.81,
+      "avg_rating": 6.65
+    },
+    {
+      "name": "Will Smith",
+      "movie_count": 10,
+      "avg_revenue": 140.08,
+      "avg_rating": 6.77
+    },
+    {
+      "name": "Matt Damon",
+      "movie_count": 10,
+      "avg_revenue": 130.44,
+      "avg_rating": 7.22
+    },
+    {
+      "name": "Leonardo DiCaprio",
+      "movie_count": 10,
+      "avg_revenue": 128.07,
+      "avg_rating": 7.97
+    },
+    {
+      "name": "Chris Hemsworth",
+      "movie_count": 10,
+      "avg_revenue": 119.53,
+      "avg_rating": 6.64
+    },
+    {
+      "name": "Emma Stone",
+      "movie_count": 10,
+      "avg_revenue": 110.69,
+      "avg_rating": 6.88
+    },
+    {
+      "name": "Charlize Theron",
+      "movie_count": 10,
+      "avg_revenue": 96.77,
+      "avg_rating": 6.49
+    },
+    {
+      "name": "Matthew McConaughey",
+      "movie_count": 10,
+      "avg_revenue": 92.46,
+      "avg_rating": 7.12
+    },
+    {
+      "name": "Josh Brolin",
+      "movie_count": 10,
+      "avg_revenue": 81.91,
+      "avg_rating": 7.03
+    },
+    {
+      "name": "Liam Neeson",
+      "movie_count": 10,
+      "avg_revenue": 76.02,
+      "avg_rating": 6.48
+    },
+    {
+      "name": "Ryan Gosling",
+      "movie_count": 10,
+      "avg_revenue": 49.35,
+      "avg_rating": 7.36
+    },
+    {
+      "name": "Chris Evans",
+      "movie_count": 9,
+      "avg_revenue": 216.56,
+      "avg_rating": 7.27
+    },
+    {
+      "name": "Daniel Radcliffe",
+      "movie_count": 9,
+      "avg_revenue": 151.83,
+      "avg_rating": 7.08
+    },
+    {
+      "name": "Jason Bateman",
+      "movie_count": 9,
+      "avg_revenue": 130.68,
+      "avg_rating": 6.78
+    },
+    {
+      "name": "Amy Adams",
+      "movie_count": 9,
+      "avg_revenue": 127.31,
+      "avg_rating": 7.4
+    },
+    {
+      "name": "Tom Hanks",
+      "movie_count": 9,
+      "avg_revenue": 120.65,
+      "avg_rating": 7.23
+    },
+    {
+      "name": "Woody Harrelson",
+      "movie_count": 9,
+      "avg_revenue": 116.4,
+      "avg_rating": 7.18
+    },
+    {
+      "name": "Jonah Hill",
+      "movie_count": 9,
+      "avg_revenue": 114.94,
+      "avg_rating": 7.22
+    },
+    {
+      "name": "Chris Pine",
+      "movie_count": 9,
+      "avg_revenue": 112.73,
+      "avg_rating": 6.97
+    },
+    {
+      "name": "Samuel L. Jackson",
+      "movie_count": 9,
+      "avg_revenue": 108.35,
+      "avg_rating": 6.8
+    },
+    {
+      "name": "Adam Sandler",
+      "movie_count": 9,
+      "avg_revenue": 97.44,
+      "avg_rating": 5.84
+    },
+    {
+      "name": "James McAvoy",
+      "movie_count": 9,
+      "avg_revenue": 96.38,
+      "avg_rating": 7.2
+    },
+    {
+      "name": "Chiwetel Ejiofor",
+      "movie_count": 9,
+      "avg_revenue": 92.75,
+      "avg_rating": 6.92
+    },
+    {
+      "name": "Denzel Washington",
+      "movie_count": 9,
+      "avg_revenue": 91.59,
+      "avg_rating": 7.2
+    },
+    {
+      "name": "Ben Kingsley",
+      "movie_count": 9,
+      "avg_revenue": 90.91,
+      "avg_rating": 6.9
+    },
+    {
+      "name": "James Franco",
+      "movie_count": 9,
+      "avg_revenue": 87.75,
+      "avg_rating": 6.64
+    },
+    {
+      "name": "Owen Wilson",
+      "movie_count": 9,
+      "avg_revenue": 81.37,
+      "avg_rating": 6.39
+    },
+    {
+      "name": "Rose Byrne",
+      "movie_count": 9,
+      "avg_revenue": 78.02,
+      "avg_rating": 6.52
+    },
+    {
+      "name": "Joseph Gordon-Levitt",
+      "movie_count": 9,
+      "avg_revenue": 75.38,
+      "avg_rating": 7.41
+    },
+    {
+      "name": "Morgan Freeman",
+      "movie_count": 9,
+      "avg_revenue": 74.18,
+      "avg_rating": 6.82
+    },
+    {
+      "name": "Sharlto Copley",
+      "movie_count": 9,
+      "avg_revenue": 71.53,
+      "avg_rating": 6.81
+    },
+    {
+      "name": "Naomi Watts",
+      "movie_count": 9,
+      "avg_revenue": 12.51,
+      "avg_rating": 6.44
+    },
+    {
+      "name": "Emma Watson",
+      "movie_count": 8,
+      "avg_revenue": 183.98,
+      "avg_rating": 7.18
+    },
+    {
+      "name": "Jeremy Renner",
+      "movie_count": 8,
+      "avg_revenue": 172.23,
+      "avg_rating": 7.47
+    },
+    {
+      "name": "Kristen Stewart",
+      "movie_count": 8,
+      "avg_revenue": 154.13,
+      "avg_rating": 5.71
+    },
+    {
+      "name": "Will Ferrell",
+      "movie_count": 8,
+      "avg_revenue": 130.44,
+      "avg_rating": 6.51
+    },
+    {
+      "name": "Mila Kunis",
+      "movie_count": 8,
+      "avg_revenue": 116.81,
+      "avg_rating": 6.69
+    },
+    {
+      "name": "Gary Oldman",
+      "movie_count": 8,
+      "avg_revenue": 116.58,
+      "avg_rating": 6.86
+    },
+    {
+      "name": "Tom Cruise",
+      "movie_count": 8,
+      "avg_revenue": 110.32,
+      "avg_rating": 6.95
+    },
+    {
+      "name": "Jesse Eisenberg",
+      "movie_count": 8,
+      "avg_revenue": 107.11,
+      "avg_rating": 6.97
+    },
+    {
+      "name": "George Clooney",
+      "movie_count": 8,
+      "avg_revenue": 92.88,
+      "avg_rating": 7.06
+    },
+    {
+      "name": "Jessica Chastain",
+      "movie_count": 8,
+      "avg_revenue": 84.94,
+      "avg_rating": 7.12
+    },
+    {
+      "name": "Jennifer Aniston",
+      "movie_count": 8,
+      "avg_revenue": 83.66,
+      "avg_rating": 6.27
+    },
+    {
+      "name": "Emily Blunt",
+      "movie_count": 8,
+      "avg_revenue": 81.5,
+      "avg_rating": 6.92
+    },
+    {
+      "name": "Natalie Portman",
+      "movie_count": 8,
+      "avg_revenue": 78.48,
+      "avg_rating": 6.62
+    },
+    {
+      "name": "Mark Strong",
+      "movie_count": 8,
+      "avg_revenue": 72.26,
+      "avg_rating": 6.95
+    },
+    {
+      "name": "Michelle Monaghan",
+      "movie_count": 8,
+      "avg_revenue": 60.45,
+      "avg_rating": 6.78
+    },
+    {
+      "name": "Zac Efron",
+      "movie_count": 8,
+      "avg_revenue": 55.14,
+      "avg_rating": 6.18
+    },
+    {
+      "name": "Joel Edgerton",
+      "movie_count": 8,
+      "avg_revenue": 54.62,
+      "avg_rating": 7.09
+    },
+    {
+      "name": "Rachel Weisz",
+      "movie_count": 8,
+      "avg_revenue": 53.77,
+      "avg_rating": 6.9
+    },
+    {
+      "name": "Robert De Niro",
+      "movie_count": 8,
+      "avg_revenue": 52.73,
+      "avg_rating": 6.65
+    },
+    {
+      "name": "Liam Hemsworth",
+      "movie_count": 7,
+      "avg_revenue": 234.51,
+      "avg_rating": 6.73
+    },
+    {
+      "name": "Chris Pratt",
+      "movie_count": 7,
+      "avg_revenue": 218.91,
+      "avg_rating": 7.19
+    },
+    {
+      "name": "Vin Diesel",
+      "movie_count": 7,
+      "avg_revenue": 193.72,
+      "avg_rating": 6.96
+    },
+    {
+      "name": "Kristen Wiig",
+      "movie_count": 7,
+      "avg_revenue": 152.45,
+      "avg_rating": 6.7
+    },
+    {
+      "name": "Angelina Jolie",
+      "movie_count": 7,
+      "avg_revenue": 138.73,
+      "avg_rating": 6.99
+    },
+    {
+      "name": "Keira Knightley",
+      "movie_count": 7,
+      "avg_revenue": 136.28,
+      "avg_rating": 7.21
+    },
+    {
+      "name": "Steve Carell",
+      "movie_count": 7,
+      "avg_revenue": 130.28,
+      "avg_rating": 7.29
+    },
+    {
+      "name": "Ryan Reynolds",
+      "movie_count": 7,
+      "avg_revenue": 126.19,
+      "avg_rating": 6.73
+    },
+    {
+      "name": "Mark Ruffalo",
+      "movie_count": 7,
+      "avg_revenue": 123.41,
+      "avg_rating": 7.5
+    },
+    {
+      "name": "Simon Pegg",
+      "movie_count": 7,
+      "avg_revenue": 118.86,
+      "avg_rating": 7.24
+    },
+    {
+      "name": "Rachel McAdams",
+      "movie_count": 7,
+      "avg_revenue": 114.0,
+      "avg_rating": 7.67
+    },
+    {
+      "name": "Viola Davis",
+      "movie_count": 7,
+      "avg_revenue": 103.26,
+      "avg_rating": 6.89
+    },
+    {
+      "name": "Bryan Cranston",
+      "movie_count": 7,
+      "avg_revenue": 84.22,
+      "avg_rating": 7.14
+    },
+    {
+      "name": "Ralph Fiennes",
+      "movie_count": 7,
+      "avg_revenue": 83.71,
+      "avg_rating": 6.73
+    },
+    {
+      "name": "Shailene Woodley",
+      "movie_count": 7,
+      "avg_revenue": 83.24,
+      "avg_rating": 6.89
+    },
+    {
+      "name": "Russell Crowe",
+      "movie_count": 7,
+      "avg_revenue": 81.2,
+      "avg_rating": 7.04
+    },
+    {
+      "name": "Patrick Wilson",
+      "movie_count": 7,
+      "avg_revenue": 78.62,
+      "avg_rating": 6.76
+    },
+    {
+      "name": "Sylvester Stallone",
+      "movie_count": 7,
+      "avg_revenue": 67.87,
+      "avg_rating": 6.83
+    },
+    {
+      "name": "Jason Sudeikis",
+      "movie_count": 7,
+      "avg_revenue": 66.57,
+      "avg_rating": 6.43
+    },
+    {
+      "name": "Kate Winslet",
+      "movie_count": 7,
+      "avg_revenue": 61.44,
+      "avg_rating": 6.86
+    },
+    {
+      "name": "Ethan Hawke",
+      "movie_count": 7,
+      "avg_revenue": 56.74,
+      "avg_rating": 6.9
+    },
+    {
+      "name": "Rooney Mara",
+      "movie_count": 7,
+      "avg_revenue": 56.41,
+      "avg_rating": 7.34
+    },
+    {
+      "name": "Teresa Palmer",
+      "movie_count": 7,
+      "avg_revenue": 44.32,
+      "avg_rating": 6.54
+    },
+    {
+      "name": "Jamie Bell",
+      "movie_count": 7,
+      "avg_revenue": 24.43,
+      "avg_rating": 6.46
+    },
+    {
+      "name": "Josh Hutcherson",
+      "movie_count": 6,
+      "avg_revenue": 263.07,
+      "avg_rating": 6.78
+    },
+    {
+      "name": "Zoe Saldana",
+      "movie_count": 6,
+      "avg_revenue": 257.11,
+      "avg_rating": 7.48
+    },
+    {
+      "name": "Domhnall Gleeson",
+      "movie_count": 6,
+      "avg_revenue": 219.15,
+      "avg_rating": 7.72
+    },
+    {
+      "name": "Ian McKellen",
+      "movie_count": 6,
+      "avg_revenue": 217.71,
+      "avg_rating": 7.58
+    },
+    {
+      "name": "Sam Worthington",
+      "movie_count": 6,
+      "avg_revenue": 203.06,
+      "avg_rating": 6.8
+    }
+  ],
+  "feature_importances": [
+    {
+      "feature": "Cast Star Score",
+      "importance": 60.52
+    },
+    {
+      "feature": "Director Track Revenue",
+      "importance": 28.49
+    },
+    {
+      "feature": "Log Votes",
+      "importance": 3.92
+    },
+    {
+      "feature": "Rating x LogVotes",
+      "importance": 0.96
+    },
+    {
+      "feature": "Runtime to Rating Ratio",
+      "importance": 0.96
+    },
+    {
+      "feature": "Year",
+      "importance": 0.67
+    },
+    {
+      "feature": "Metascore Rating Ratio",
+      "importance": 0.56
+    },
+    {
+      "feature": "Metascore",
+      "importance": 0.54
+    },
+    {
+      "feature": "Genre: Fantasy",
+      "importance": 0.53
+    },
+    {
+      "feature": "Runtime (Minutes)",
+      "importance": 0.49
+    },
+    {
+      "feature": "Rating",
+      "importance": 0.43
+    },
+    {
+      "feature": "Genre: Mystery",
+      "importance": 0.42
+    },
+    {
+      "feature": "Genre: Adventure",
+      "importance": 0.35
+    },
+    {
+      "feature": "Genre: Drama",
+      "importance": 0.22
+    },
+    {
+      "feature": "Genre: Thriller",
+      "importance": 0.11
+    },
+    {
+      "feature": "Genre: Count",
+      "importance": 0.11
+    },
+    {
+      "feature": "Genre: Crime",
+      "importance": 0.1
+    },
+    {
+      "feature": "Genre: Sci-Fi",
+      "importance": 0.1
+    },
+    {
+      "feature": "Genre: Family",
+      "importance": 0.08
+    },
+    {
+      "feature": "Genre: Action",
+      "importance": 0.07
+    },
+    {
+      "feature": "Genre: Animation",
+      "importance": 0.07
+    },
+    {
+      "feature": "Genre: Biography",
+      "importance": 0.06
+    },
+    {
+      "feature": "Genre: Music",
+      "importance": 0.06
+    },
+    {
+      "feature": "Genre: Comedy",
+      "importance": 0.04
+    },
+    {
+      "feature": "Genre: History",
+      "importance": 0.04
+    },
+    {
+      "feature": "Genre: Horror",
+      "importance": 0.02
+    },
+    {
+      "feature": "Genre: Musical",
+      "importance": 0.02
+    },
+    {
+      "feature": "Genre: Romance",
+      "importance": 0.02
+    },
+    {
+      "feature": "Genre: Western",
+      "importance": 0.02
+    },
+    {
+      "feature": "Genre: Sport",
+      "importance": 0.01
+    },
+    {
+      "feature": "Genre: War",
+      "importance": 0.01
+    }
+  ],
+  "model_metrics": {
+    "r2_score": 0.8363,
+    "rmse_millions": 33.33,
+    "mae_millions": 18.59,
+    "classifier_accuracy": 80.5,
+    "rf_r2": 0.8182,
+    "gbr_r2": 0.8442,
+    "test_samples": 200,
+    "train_samples": 800
+  },
+  "tier_distribution": {
+    "Hit": 308,
+    "Flop / Niche": 290,
+    "Moderate": 247,
+    "Blockbuster": 155
+  }
+}

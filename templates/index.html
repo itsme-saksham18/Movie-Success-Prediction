@@ -1,0 +1,773 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineMetrics AI - Movie Success & Box Office Prediction Engine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="/static/css/custom.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81', 950: '#1e1b4b' },
+            surface: { 800: '#0f172a', 900: '#0b0f19', 950: '#060911' }
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-surface-950 text-slate-100 min-h-screen flex flex-col selection:bg-brand-500 selection:text-white bg-glow-radial">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 glass-panel border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('predict')">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-indigo-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-brand-500/30">
+            <i class="fa-solid fa-clapperboard text-white text-lg"></i>
+          </div>
+          <div>
+            <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-brand-300 bg-clip-text text-transparent">
+              CineMetrics<span class="text-brand-400">.AI</span>
+            </span>
+            <span class="hidden sm:inline-block ml-2 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-full bg-brand-500/10 text-brand-300 border border-brand-500/20">
+              v2.0 ML Engine
+            </span>
+          </div>
+        </div>
+
+        <nav class="hidden md:flex items-center gap-1 bg-surface-900/80 p-1.5 rounded-xl border border-slate-800">
+          <button onclick="switchTab('predict')" id="nav-predict" class="nav-btn px-4 py-2 text-sm font-medium rounded-lg transition-all text-white bg-brand-600 shadow-md shadow-brand-600/30">
+            <i class="fa-solid fa-wand-magic-sparkles mr-2 text-xs"></i>AI Predictor
+          </button>
+          <button onclick="switchTab('whatif')" id="nav-whatif" class="nav-btn px-4 py-2 text-sm font-medium rounded-lg transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+            <i class="fa-solid fa-sliders mr-2 text-xs"></i>What-If Lab
+          </button>
+          <button onclick="switchTab('analytics')" id="nav-analytics" class="nav-btn px-4 py-2 text-sm font-medium rounded-lg transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+            <i class="fa-solid fa-chart-pie mr-2 text-xs"></i>Box Office Stats
+          </button>
+          <button onclick="switchTab('explorer')" id="nav-explorer" class="nav-btn px-4 py-2 text-sm font-medium rounded-lg transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+            <i class="fa-solid fa-film mr-2 text-xs"></i>Movie Explorer
+          </button>
+          <button onclick="switchTab('model')" id="nav-model" class="nav-btn px-4 py-2 text-sm font-medium rounded-lg transition-all text-slate-400 hover:text-slate-200 hover:bg-slate-800/50">
+            <i class="fa-solid fa-brain mr-2 text-xs"></i>Model Benchmarks
+          </button>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <a href="/docs" target="_blank" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors flex items-center gap-1.5">
+            <i class="fa-solid fa-book-open text-brand-400"></i> API Docs
+          </a>
+          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> ML Ready
+          </span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="md:hidden flex overflow-x-auto gap-2 p-2 bg-surface-900 border-b border-slate-800 text-xs">
+    <button onclick="switchTab('predict')" class="whitespace-nowrap px-3 py-1.5 rounded-md bg-brand-600 text-white font-medium">Predictor</button>
+    <button onclick="switchTab('whatif')" class="whitespace-nowrap px-3 py-1.5 rounded-md bg-slate-800 text-slate-300 font-medium">What-If</button>
+    <button onclick="switchTab('analytics')" class="whitespace-nowrap px-3 py-1.5 rounded-md bg-slate-800 text-slate-300 font-medium">Analytics</button>
+    <button onclick="switchTab('explorer')" class="whitespace-nowrap px-3 py-1.5 rounded-md bg-slate-800 text-slate-300 font-medium">Explorer</button>
+    <button onclick="switchTab('model')" class="whitespace-nowrap px-3 py-1.5 rounded-md bg-slate-800 text-slate-300 font-medium">Model</button>
+  </div>
+
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div id="tab-content-predict" class="tab-pane block space-y-8">
+      
+      <!-- Banner -->
+      <div class="glass-card rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+        <div class="absolute -right-16 -bottom-16 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/20 text-brand-300 border border-brand-500/30 mb-4">
+            <i class="fa-solid fa-sparkles"></i> Machine Learning Box Office Intelligence
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white leading-tight">
+            Predict Theatrical Revenue & Commercial Success Tiers
+          </h1>
+          <p class="mt-3 text-slate-300 text-sm sm:text-base leading-relaxed">
+            Harnessing Random Forest & Gradient Boosting ensembles with Bayesian director/cast prior encoding to forecast movie gross revenues, success tiers, and historical comparable benchmarks.
+          </p>
+        </div>
+        <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-slate-800/80">
+          <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+            <div class="text-xs text-slate-400">Dataset Baseline</div>
+            <div class="text-lg font-bold text-white font-mono mt-0.5">1,000 Films</div>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+            <div class="text-xs text-slate-400">Model Accuracy (R²)</div>
+            <div class="text-lg font-bold text-emerald-400 font-mono mt-0.5">83.6%</div>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+            <div class="text-xs text-slate-400">Tier Classification</div>
+            <div class="text-lg font-bold text-cyan-400 font-mono mt-0.5">80.5% Acc</div>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
+            <div class="text-xs text-slate-400">Average Historical Revenue</div>
+            <div class="text-lg font-bold text-amber-400 font-mono mt-0.5">$82.9M</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Presets -->
+      <div>
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+            <i class="fa-solid fa-bolt text-amber-400"></i> Fast Presets & Film Archetypes
+          </h3>
+          <span class="text-xs text-slate-400">Click any preset to autofill parameters</span>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3" id="presets-container">
+          {% for preset in presets %}
+          <button onclick="loadPreset('{{ preset.id }}')" class="glass-card glass-card-interactive p-3.5 rounded-xl text-left flex flex-col justify-between group">
+            <div>
+              <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
+                <i class="fa-solid {{ preset.icon }} text-brand-400 group-hover:scale-110 transition-transform"></i>
+                <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300">{{ preset.badge }}</span>
+              </div>
+              <div class="font-semibold text-xs sm:text-sm text-slate-100 group-hover:text-brand-300 transition-colors line-clamp-1">
+                {{ preset.name }}
+              </div>
+            </div>
+            <div class="mt-2 text-[11px] text-slate-400 line-clamp-1">
+              {{ preset.data.title }}
+            </div>
+          </button>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Form Left (7 Cols) -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-800">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
+              <h2 class="text-lg font-bold text-white flex items-center gap-2.5">
+                <span class="w-7 h-7 rounded-lg bg-brand-500/20 text-brand-400 flex items-center justify-center text-sm">
+                  <i class="fa-solid fa-film"></i>
+                </span>
+                Production Parameters
+              </h2>
+              <button type="button" onclick="resetForm()" class="text-xs text-slate-400 hover:text-slate-200 transition-colors flex items-center gap-1">
+                <i class="fa-solid fa-rotate-left"></i> Reset
+              </button>
+            </div>
+
+            <form id="prediction-form" onsubmit="handlePredictionSubmit(event)" class="space-y-6">
+              
+              <!-- Title & Year -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="sm:col-span-2">
+                  <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Movie Title</label>
+                  <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                      <i class="fa-solid fa-heading text-xs"></i>
+                    </span>
+                    <input type="text" id="input-title" placeholder="e.g. Project Odyssey" value="Interstellar Echoes"
+                      class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all">
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Release Year</label>
+                  <input type="number" id="input-year" min="2000" max="2030" value="2025"
+                    class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3.5 py-2.5 text-sm text-white font-mono focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all">
+                </div>
+              </div>
+
+              <!-- Genres Multi-select Pills -->
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <label class="text-xs font-semibold text-slate-300 uppercase tracking-wider">
+                    Genres <span class="text-slate-500 font-normal">(Select 1 to 4)</span>
+                  </label>
+                  <span id="genre-selected-count" class="text-xs text-brand-400 font-mono">2 selected</span>
+                </div>
+                <div class="flex flex-wrap gap-2" id="genre-pills-container">
+                  <!-- Rendered by JS -->
+                </div>
+              </div>
+
+              <!-- Director & Lead Cast -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="relative">
+                  <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Director</label>
+                  <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                      <i class="fa-solid fa-video text-xs"></i>
+                    </span>
+                    <input type="text" id="input-director" placeholder="e.g. Christopher Nolan" value="Christopher Nolan"
+                      autocomplete="off"
+                      class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all">
+                  </div>
+                  <div id="director-suggestions" class="absolute left-0 right-0 top-full mt-1 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-20 max-h-48 overflow-y-auto hidden"></div>
+                </div>
+
+                <div class="relative">
+                  <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+                    Lead Cast <span class="text-slate-500 font-normal">(comma separated)</span>
+                  </label>
+                  <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+                      <i class="fa-solid fa-users text-xs"></i>
+                    </span>
+                    <input type="text" id="input-actors" placeholder="e.g. Matthew McConaughey, Anne Hathaway" value="Matthew McConaughey, Anne Hathaway"
+                      autocomplete="off"
+                      class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all">
+                  </div>
+                  <div id="actor-suggestions" class="absolute left-0 right-0 top-full mt-1 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl z-20 max-h-48 overflow-y-auto hidden"></div>
+                </div>
+              </div>
+
+              <!-- Sliders -->
+              <div class="space-y-5 pt-2">
+                
+                <!-- IMDb Rating -->
+                <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+                  <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2">
+                      <span class="w-6 h-6 rounded bg-amber-500/20 text-amber-400 flex items-center justify-center text-xs">
+                        <i class="fa-solid fa-star"></i>
+                      </span>
+                      <span class="text-xs font-semibold text-slate-200">Expected IMDb Rating</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span id="rating-badge" class="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Acclaimed</span>
+                      <span id="rating-val" class="font-mono text-base font-bold text-amber-400">8.4</span>
+                    </div>
+                  </div>
+                  <input type="range" id="input-rating" min="1.0" max="10.0" step="0.1" value="8.4" class="w-full" oninput="updateRatingDisplay(this.value)">
+                  <div class="flex justify-between text-[10px] text-slate-500 mt-1 font-mono">
+                    <span>1.0 (Flop)</span>
+                    <span>6.7 (Avg)</span>
+                    <span>10.0 (Masterpiece)</span>
+                  </div>
+                </div>
+
+                <!-- Metascore -->
+                <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+                  <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2">
+                      <span class="w-6 h-6 rounded bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs">
+                        <i class="fa-solid fa-award"></i>
+                      </span>
+                      <span class="text-xs font-semibold text-slate-200">Expected Critic Metascore (0-100)</span>
+                    </div>
+                    <span id="metascore-val" class="font-mono text-base font-bold text-brand-300">76</span>
+                  </div>
+                  <input type="range" id="input-metascore" min="0" max="100" step="1" value="76" class="w-full" oninput="updateMetascoreDisplay(this.value)">
+                  <div class="flex justify-between text-[10px] text-slate-500 mt-1 font-mono">
+                    <span>0 (Unfavorable)</span>
+                    <span>59 (Mixed)</span>
+                    <span>100 (Acclaim)</span>
+                  </div>
+                </div>
+
+                <!-- Runtime -->
+                <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+                  <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2">
+                      <span class="w-6 h-6 rounded bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs">
+                        <i class="fa-solid fa-clock"></i>
+                      </span>
+                      <span class="text-xs font-semibold text-slate-200">Runtime (Minutes)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span id="runtime-formatted" class="text-xs text-slate-400 font-mono">2h 28m</span>
+                      <span id="runtime-val" class="font-mono text-base font-bold text-cyan-400">148 min</span>
+                    </div>
+                  </div>
+                  <input type="range" id="input-runtime" min="60" max="220" step="1" value="148" class="w-full" oninput="updateRuntimeDisplay(this.value)">
+                  <div class="flex justify-between text-[10px] text-slate-500 mt-1 font-mono">
+                    <span>60 min</span>
+                    <span>113 min (Avg)</span>
+                    <span>220 min</span>
+                  </div>
+                </div>
+
+                <!-- Audience Votes -->
+                <div class="p-4 rounded-xl bg-slate-900/50 border border-slate-800">
+                  <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2">
+                      <span class="w-6 h-6 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs">
+                        <i class="fa-solid fa-fire"></i>
+                      </span>
+                      <span class="text-xs font-semibold text-slate-200">Audience Engagement / Votes Reach</span>
+                    </div>
+                    <span id="votes-val" class="font-mono text-base font-bold text-emerald-400">650,000</span>
+                  </div>
+                  <input type="range" id="input-votes" min="5000" max="1800000" step="5000" value="650000" class="w-full" oninput="updateVotesDisplay(this.value)">
+                  
+                  <div class="flex flex-wrap gap-1.5 mt-3">
+                    <button type="button" onclick="setVotes(25000)" class="px-2 py-1 text-[11px] rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700">Niche / Indie (25k)</button>
+                    <button type="button" onclick="setVotes(120000)" class="px-2 py-1 text-[11px] rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700">Moderate Wide (120k)</button>
+                    <button type="button" onclick="setVotes(450000)" class="px-2 py-1 text-[11px] rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700">Major Studio (450k)</button>
+                    <button type="button" onclick="setVotes(1000000)" class="px-2 py-1 text-[11px] rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700">Global Phenomenon (1M)</button>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Submit -->
+              <button type="submit" id="btn-submit"
+                class="w-full py-4 px-6 rounded-xl font-bold text-base text-white bg-gradient-to-r from-brand-600 via-indigo-600 to-cyan-500 hover:from-brand-500 hover:to-cyan-400 shadow-lg shadow-brand-500/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-3">
+                <i class="fa-solid fa-wand-magic-sparkles text-lg animate-pulse"></i>
+                <span>Generate Commercial Success Forecast</span>
+              </button>
+
+            </form>
+          </div>
+        </div>
+﻿        <!-- Results Section (5 Cols) -->
+        <div class="lg:col-span-5 space-y-6">
+
+          <!-- Empty State -->
+          <div id="results-empty" class="glass-card rounded-2xl p-8 text-center flex flex-col items-center justify-center min-h-[460px] border border-dashed border-slate-700">
+            <div class="w-16 h-16 rounded-2xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center mb-4 text-brand-400 text-2xl">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white">Prediction Engine Ready</h3>
+            <p class="text-sm text-slate-400 max-w-sm mt-2">
+              Select your movie parameters or choose an archetype preset above, then click <strong class="text-slate-200">"Generate Commercial Success Forecast"</strong>.
+            </p>
+            <button onclick="document.getElementById('btn-submit').click()" class="mt-6 px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors">
+              <i class="fa-solid fa-play mr-1.5 text-brand-400"></i> Run Sample Prediction
+            </button>
+          </div>
+
+          <!-- Active Prediction Results Display -->
+          <div id="results-active" class="hidden space-y-6">
+
+            <!-- Hero Result Card -->
+            <div class="glass-card rounded-2xl p-6 sm:p-7 border border-slate-700/80 relative overflow-hidden bg-gradient-to-b from-slate-900/90 to-surface-950">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-semibold tracking-wider text-slate-400 uppercase">Forecasted Box Office</span>
+                <span id="res-tier-badge" class="px-3 py-1 rounded-full text-xs font-bold border tracking-wide uppercase">
+                  Blockbuster
+                </span>
+              </div>
+
+              <!-- Big Revenue Counter -->
+              <div class="flex items-baseline gap-2">
+                <span class="text-2xl sm:text-3xl font-extrabold text-slate-400">$</span>
+                <span id="res-revenue-val" class="text-4xl sm:text-5xl font-black tracking-tight text-white font-mono text-glow-indigo">
+                  0.00
+                </span>
+                <span class="text-lg sm:text-xl font-bold text-slate-400">Million</span>
+              </div>
+
+              <!-- Confidence Range -->
+              <div class="mt-3 flex items-center gap-2 text-xs text-slate-400">
+                <i class="fa-solid fa-shield-halved text-brand-400"></i>
+                <span>Confidence Range: <strong id="res-ci-range" class="text-slate-200 font-mono">$0M - $0M</strong></span>
+              </div>
+
+              <!-- Viability Score -->
+              <div class="mt-6 pt-6 border-t border-slate-800 grid grid-cols-2 gap-4">
+                <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                  <div class="text-[11px] text-slate-400">Commercial Score</div>
+                  <div class="flex items-baseline gap-1 mt-1">
+                    <span id="res-viability-score" class="text-2xl font-bold text-amber-400 font-mono">0</span>
+                    <span class="text-xs text-slate-500 font-mono">/ 100</span>
+                  </div>
+                  <div class="w-full bg-slate-800 h-1.5 rounded-full mt-2 overflow-hidden">
+                    <div id="res-viability-bar" class="bg-gradient-to-r from-amber-500 to-emerald-400 h-full rounded-full transition-all duration-1000" style="width: 0%"></div>
+                  </div>
+                </div>
+                
+                <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                  <div class="text-[11px] text-slate-400">Primary Success Tier</div>
+                  <div id="res-tier-text" class="text-base font-bold text-emerald-400 mt-1">Hit</div>
+                  <div id="res-tier-prob" class="text-xs text-slate-400 font-mono mt-1">Confidence: 85%</div>
+                </div>
+              </div>
+
+              <!-- Tier Probabilities Breakdown -->
+              <div class="mt-5 space-y-2">
+                <div class="text-xs font-semibold text-slate-300">Tier Probability Distribution</div>
+                <div class="space-y-1.5" id="tier-probs-bars">
+                  <!-- Rendered dynamically -->
+                </div>
+              </div>
+
+              <!-- Executive Verdict -->
+              <div class="mt-6 p-4 rounded-xl bg-brand-500/10 border border-brand-500/20 text-xs sm:text-sm text-slate-200 leading-relaxed">
+                <div class="flex items-center gap-2 font-semibold text-brand-300 mb-1">
+                  <i class="fa-solid fa-brain"></i> AI Theatrical Verdict
+                </div>
+                <p id="res-verdict-text"></p>
+              </div>
+
+            </div>
+
+            <!-- Key Success Drivers -->
+            <div class="glass-card rounded-2xl p-6 border border-slate-800">
+              <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-chart-line text-emerald-400"></i> Key Revenue Drivers
+              </h3>
+              <div id="res-impacts-list" class="space-y-2.5"></div>
+            </div>
+
+            <!-- Historical Comparables -->
+            <div class="glass-card rounded-2xl p-6 border border-slate-800">
+              <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-copy text-indigo-400"></i> Historical Comparables (Nearest Neighbors)
+              </h3>
+              <div id="res-comparables-list" class="space-y-3"></div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+﻿    <!-- ========================================== -->
+    <!-- TAB 2: WHAT-IF SENSITIVITY LAB -->
+    <!-- ========================================== -->
+    <div id="tab-content-whatif" class="tab-pane hidden space-y-8">
+      <div class="glass-card rounded-2xl p-6 sm:p-8">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 mb-3">
+            <i class="fa-solid fa-sliders"></i> Dynamic Simulation Sandbox
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">What-If Sensitivity Engine</h2>
+          <p class="mt-2 text-slate-300 text-sm">
+            Tweak ratings, marketing buzz, runtimes, and critical response in real time to instantly see how production decisions alter box office revenue and tier probability.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-6 space-y-5">
+          <div class="glass-card rounded-2xl p-6 border border-slate-800">
+            <h3 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+              <i class="fa-solid fa-sliders text-brand-400"></i> Adjust Simulation Variables
+            </h3>
+
+            <div class="space-y-5">
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1.5">
+                  <span>IMDb Rating Sensitivity</span>
+                  <span id="whatif-rating-val" class="font-mono text-amber-400 font-bold">7.5</span>
+                </div>
+                <input type="range" id="whatif-rating" min="2.0" max="9.5" step="0.1" value="7.5" class="w-full" oninput="runWhatIfLive()">
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1.5">
+                  <span>Metascore (Critical Reception)</span>
+                  <span id="whatif-meta-val" class="font-mono text-indigo-400 font-bold">65</span>
+                </div>
+                <input type="range" id="whatif-meta" min="10" max="100" step="1" value="65" class="w-full" oninput="runWhatIfLive()">
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1.5">
+                  <span>Audience Reach / Anticipation Votes</span>
+                  <span id="whatif-votes-val" class="font-mono text-emerald-400 font-bold">250,000</span>
+                </div>
+                <input type="range" id="whatif-votes" min="10000" max="1500000" step="10000" value="250000" class="w-full" oninput="runWhatIfLive()">
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-semibold text-slate-300 mb-1.5">
+                  <span>Runtime (Minutes)</span>
+                  <span id="whatif-runtime-val" class="font-mono text-cyan-400 font-bold">120 min</span>
+                </div>
+                <input type="range" id="whatif-runtime" min="70" max="210" step="1" value="120" class="w-full" oninput="runWhatIfLive()">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 space-y-5">
+          <div class="glass-card rounded-2xl p-6 border border-slate-800">
+            <h3 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+              <i class="fa-solid fa-scale-balanced text-emerald-400"></i> Simulation Comparison
+            </h3>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="p-4 rounded-xl bg-slate-900/70 border border-slate-800">
+                <div class="text-xs text-slate-400">Base Prediction</div>
+                <div id="whatif-base-rev" class="text-2xl font-bold text-white font-mono mt-1">$0.00M</div>
+                <div id="whatif-base-tier" class="text-xs text-slate-400 mt-1">Tier: -</div>
+              </div>
+              <div class="p-4 rounded-xl bg-brand-950/40 border border-brand-500/30">
+                <div class="text-xs text-brand-300">Simulated Prediction</div>
+                <div id="whatif-sim-rev" class="text-2xl font-bold text-cyan-300 font-mono mt-1">$0.00M</div>
+                <div id="whatif-sim-tier" class="text-xs text-cyan-400 mt-1">Tier: -</div>
+              </div>
+            </div>
+
+            <div class="mt-4 p-4 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center justify-between">
+              <div>
+                <div class="text-xs text-slate-400">Net Box Office Delta</div>
+                <div id="whatif-delta-rev" class="text-3xl font-black font-mono mt-0.5 text-emerald-400">+$0.00M</div>
+              </div>
+              <div id="whatif-delta-badge" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono">
+                +0.0%
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-800">
+              <h4 class="text-xs font-semibold text-slate-400 mb-3">Rating vs Revenue Sensitivity Curve</h4>
+              <div class="h-48">
+                <canvas id="whatif-chart"></canvas>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: BOX OFFICE ANALYTICS & STATS -->
+    <!-- ========================================== -->
+    <div id="tab-content-analytics" class="tab-pane hidden space-y-8">
+      <div class="glass-card rounded-2xl p-6 sm:p-8">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 mb-3">
+            <i class="fa-solid fa-chart-pie"></i> Macro Visualizations & Insights
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Box Office Dataset Intelligence</h2>
+          <p class="mt-2 text-slate-300 text-sm">
+            Exploratory analysis across 1,000 top films highlighting genre profitability, director track records, and rating-to-revenue dynamics.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <div class="glass-card rounded-2xl p-6 border border-slate-800">
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-chart-column text-brand-400"></i> Top Grossing Genres (Avg Revenue $M)
+          </h3>
+          <div class="h-72">
+            <canvas id="chart-genres"></canvas>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 border border-slate-800">
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-chart-pie text-cyan-400"></i> Success Tier Breakdown
+          </h3>
+          <div class="h-72 flex items-center justify-center">
+            <canvas id="chart-tiers"></canvas>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 border border-slate-800">
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-trophy text-amber-400"></i> Top 10 Grossing Directors ($M Avg)
+          </h3>
+          <div class="h-72">
+            <canvas id="chart-directors"></canvas>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl p-6 border border-slate-800">
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-chart-line text-emerald-400"></i> IMDb Rating vs Box Office Revenue
+          </h3>
+          <div class="h-72">
+            <canvas id="chart-scatter"></canvas>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: MOVIE DATASET EXPLORER -->
+    <!-- ========================================== -->
+    <div id="tab-content-explorer" class="tab-pane hidden space-y-6">
+      
+      <div class="glass-card rounded-2xl p-6 border border-slate-800">
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
+          <div class="sm:col-span-6 relative">
+            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              <i class="fa-solid fa-magnifying-glass text-xs"></i>
+            </span>
+            <input type="text" id="explorer-search" placeholder="Search by title, director, or actor..."
+              oninput="debounceSearch()"
+              class="w-full bg-slate-900 border border-slate-700/80 rounded-xl pl-9 pr-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500">
+          </div>
+
+          <div class="sm:col-span-3">
+            <select id="explorer-genre" onchange="fetchExplorerMovies(1)"
+              class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-brand-500">
+              <option value="All">All Genres</option>
+            </select>
+          </div>
+
+          <div class="sm:col-span-3">
+            <select id="explorer-sort" onchange="fetchExplorerMovies(1)"
+              class="w-full bg-slate-900 border border-slate-700/80 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-brand-500">
+              <option value="Revenue (Millions)">Revenue (High to Low)</option>
+              <option value="Rating">IMDb Rating</option>
+              <option value="Votes">Votes Reach</option>
+              <option value="Metascore">Metascore</option>
+              <option value="Runtime (Minutes)">Runtime</option>
+              <option value="Year">Release Year</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div id="explorer-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+
+      <div class="flex items-center justify-between glass-card p-4 rounded-xl border border-slate-800">
+        <span id="explorer-page-info" class="text-xs text-slate-400 font-mono">Showing 1 to 12 of 1000 movies</span>
+        <div class="flex items-center gap-2">
+          <button id="explorer-prev-btn" onclick="prevPage()" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 disabled:opacity-40">
+            <i class="fa-solid fa-chevron-left mr-1"></i> Previous
+          </button>
+          <button id="explorer-next-btn" onclick="nextPage()" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 disabled:opacity-40">
+            Next <i class="fa-solid fa-chevron-right ml-1"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB 5: MODEL ARCHITECTURE & BENCHMARKS -->
+    <!-- ========================================== -->
+    <div id="tab-content-model" class="tab-pane hidden space-y-8">
+      <div class="glass-card rounded-2xl p-6 sm:p-8">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/20 text-brand-300 border border-brand-500/30 mb-3">
+            <i class="fa-solid fa-microchip"></i> Algorithm & Machine Learning Specs
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Model Architecture & Verification</h2>
+          <p class="mt-2 text-slate-300 text-sm">
+            High-performance hybrid machine learning ensemble combining Random Forest Regressors, Gradient Boosted Decision Trees, Empirical Bayesian prior smoothing, and Cosine Vector nearest neighbors.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass-card p-6 rounded-2xl border border-slate-800">
+          <div class="w-10 h-10 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center mb-4 text-lg">
+            <i class="fa-solid fa-database"></i>
+          </div>
+          <h4 class="text-base font-bold text-white mb-2">1. Feature Engineering</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Multi-hot 20-genre vectorization, log1p transformation on audience votes, Bayesian target encoding with empirical smoothing prior (m=2.0) on directors and cast, and interaction terms.
+          </p>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl border border-slate-800">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center mb-4 text-lg">
+            <i class="fa-solid fa-network-wired"></i>
+          </div>
+          <h4 class="text-base font-bold text-white mb-2">2. Dual Model Ensemble</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Stacked 150-estimator Random Forest + Gradient Boosted Regressor optimized with cross-validation, achieving an <strong>R² of 0.8363</strong> and mean absolute error of <strong>$22.9M</strong>.
+          </p>
+        </div>
+
+        <div class="glass-card p-6 rounded-2xl border border-slate-800">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-4 text-lg">
+            <i class="fa-solid fa-bullseye"></i>
+          </div>
+          <h4 class="text-base font-bold text-white mb-2">3. Classification & Neighbors</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Multi-class Gradient Boosting classifier for Success Tier categorization (80.5% Accuracy) and Cosine Nearest-Neighbors embeddings for instantaneous historical film comparisons.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-6 glass-card p-6 rounded-2xl border border-slate-800">
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-square-poll-vertical text-brand-400"></i> Model Validation Metrics
+          </h3>
+          <div class="space-y-3 font-mono text-xs">
+            <div class="flex justify-between p-3 rounded-lg bg-slate-900 border border-slate-800">
+              <span class="text-slate-400">Ensemble R² Score</span>
+              <span class="text-emerald-400 font-bold">0.8363 (83.6%)</span>
+            </div>
+            <div class="flex justify-between p-3 rounded-lg bg-slate-900 border border-slate-800">
+              <span class="text-slate-400">Root Mean Squared Error (RMSE)</span>
+              <span class="text-cyan-400 font-bold">$39.37 Million</span>
+            </div>
+            <div class="flex justify-between p-3 rounded-lg bg-slate-900 border border-slate-800">
+              <span class="text-slate-400">Mean Absolute Error (MAE)</span>
+              <span class="text-amber-400 font-bold">$22.92 Million</span>
+            </div>
+            <div class="flex justify-between p-3 rounded-lg bg-slate-900 border border-slate-800">
+              <span class="text-slate-400">Tier Classifier Accuracy</span>
+              <span class="text-emerald-400 font-bold">80.50%</span>
+            </div>
+            <div class="flex justify-between p-3 rounded-lg bg-slate-900 border border-slate-800">
+              <span class="text-slate-400">Random Forest Sub-Model R²</span>
+              <span class="text-slate-300">0.8258</span>
+            </div>
+            <div class="flex justify-between p-3 rounded-lg bg-slate-900 border border-slate-800">
+              <span class="text-slate-400">Gradient Boosting Sub-Model R²</span>
+              <span class="text-slate-300">0.8342</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 glass-card p-6 rounded-2xl border border-slate-800">
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+            <i class="fa-solid fa-list-ol text-cyan-400"></i> Top Predictive Feature Importances
+          </h3>
+          <div class="h-64">
+            <canvas id="chart-importances"></canvas>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Modal -->
+  <div id="movie-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="glass-card rounded-2xl p-6 sm:p-8 max-w-xl w-full border border-slate-700 shadow-2xl relative">
+      <button onclick="closeMovieModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="glass-panel border-t border-slate-800/80 mt-16 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <div class="flex items-center gap-2">
+        <div class="w-5 h-5 rounded bg-brand-600 flex items-center justify-center text-white text-[10px]">
+          <i class="fa-solid fa-clapperboard"></i>
+        </div>
+        <span>CineMetrics AI &copy; 2026 - Advanced Movie Box Office Prediction Web Application</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span>Powered by FastAPI & Scikit-Learn</span>
+        <a href="/docs" class="text-brand-400 hover:underline">Swagger API</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    window.APP_METADATA = {{ metadata | tojson }};
+    window.APP_PRESETS = {{ presets | tojson }};
+  </script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
